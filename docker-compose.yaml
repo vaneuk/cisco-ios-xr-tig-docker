@@ -1,0 +1,56 @@
+version: "3"
+services:
+  influxdb:
+    image: ${INFLUXDB_IMAGE}
+    container_name: influxdb
+    restart: always
+    ports:
+      - 8086:8086
+    networks:
+      - telemetry
+    volumes:
+      - ${INFLUXDB_CONFIG}:/etc/influxdb2
+      - ${INFLUXDB_ENGINE}:/var/lib/influxdb2
+    environment:
+      - INFLUXD_CONFIG_PATH=/etc/influxdb
+
+  telegraf:
+    image: ${TELEGRAF_IMAGE}
+    container_name: telegraf
+    restart: always
+    # user: "${CURRENT_UID}:${CURRENT_GID}"
+    ports:
+      - 57000:57000
+    networks:
+      - telemetry
+    volumes:
+      - ${TELEGRAF_CONFIG}:/etc/telegraf:ro
+
+  grafana:
+    image: ${GRAFANA_IMAGE}
+    container_name: grafana
+    # user: "${CURRENT_UID}:${CURRENT_GID}"
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - telemetry
+    volumes:
+      - ${GRAFANA_CONFIG}:/etc/grafana:ro
+      - grafana-volume:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_ADMIN_USER}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWD}
+      - INFLUXDB_ORG=${INFLUXDB_ORG}
+      - INFLUXDB_BUCKET=${INFLUXDB_BUCKET}
+      - INFLUXDB_TOKEN=${INFLUXDB_INIT_TOKEN}
+
+networks:
+  telemetry:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.238.0/24
+
+volumes:
+  grafana-volume:
