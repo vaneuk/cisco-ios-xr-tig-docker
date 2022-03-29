@@ -99,9 +99,9 @@
           {
             "datasource": {
               "type": "influxdb",
-              "uid": "2sEC8mynz"
+              "uid": "influxdb01"
             },
-            "query": "from(bucket: \"cisco_mdt\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters\")\r\n  |> filter(fn: (r) => r[\"interface_name\"] == \"MgmtEth0/RP0/CPU0/0\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"packets_received\" or r[\"_field\"] == \"packets_sent\")\r\n      |> difference()\r\n      |> map(fn: (r) => ({r with _value: float(v: r._value) / 30.0}))",
+            "query": "from(bucket: v.bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/latest/generic-counters\")\r\n  |> filter(fn: (r) => r[\"interface_name\"] == \"MgmtEth0/RP0/CPU0/0\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"packets_received\" or r[\"_field\"] == \"packets_sent\")\r\n      |> difference()\r\n      |> map(fn: (r) => ({r with _value: float(v: r._value) / 30.0}))",
             "refId": "A"
           }
         ],
@@ -182,9 +182,9 @@
           {
             "datasource": {
               "type": "influxdb",
-              "uid": "2sEC8mynz"
+              "uid": "influxdb01"
             },
-            "query": "from(bucket: \"cisco_mdt\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Cisco-IOS-XR-shellutil-oper:system-time/uptime\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"uptime\")\r\n      |> map(fn: (r) => ({r with _value: r._value / 60}))",
+            "query": "from(bucket: v.bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Cisco-IOS-XR-shellutil-oper:system-time/uptime\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"uptime\")\r\n      |> map(fn: (r) => ({r with _value: r._value / 60}))",
             "refId": "A"
           }
         ],
@@ -264,9 +264,9 @@
           {
             "datasource": {
               "type": "influxdb",
-              "uid": "2sEC8mynz"
+              "uid": "influxdb01"
             },
-            "query": "from(bucket: \"cisco_mdt\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Cisco-IOS-XR-wdsysmon-fd-oper:system-monitoring/cpu-utilization\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"process_cpu/process_cpu_one_minute\")\r\n  |> group(columns: [\"source\"])\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
+            "query": "from(bucket: v.bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Cisco-IOS-XR-wdsysmon-fd-oper:system-monitoring/cpu-utilization\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"process_cpu/process_cpu_one_minute\")\r\n  |> group(columns: [\"source\"])\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")",
             "refId": "A"
           }
         ],
@@ -347,9 +347,9 @@
           {
             "datasource": {
               "type": "influxdb",
-              "uid": "2sEC8mynz"
+              "uid": "influxdb01"
             },
-            "query": "from(bucket: \"cisco_mdt\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Cisco-IOS-XR-nto-misc-oper:memory-summary/nodes/node/summary\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"ram_memory\" or r[\"_field\"] == \"free_physical_memory\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")\r\n",
+            "query": "from(bucket: v.bucket)\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"Cisco-IOS-XR-nto-misc-oper:memory-summary/nodes/node/summary\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"ram_memory\" or r[\"_field\"] == \"free_physical_memory\")\r\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\r\n  |> yield(name: \"mean\")\r\n",
             "refId": "A"
           }
         ],
