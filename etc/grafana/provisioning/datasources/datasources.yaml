@@ -13,5 +13,5 @@ datasources:
     jsonData:
       version: Flux
       organization: ${INFLUXDB_ORG}
-      defaultBucket: ${INLFUXDB_BUCKET}
+      defaultBucket: ${INFLUXDB_BUCKET}
       httpMode: POST

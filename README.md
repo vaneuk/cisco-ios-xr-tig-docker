@@ -7,6 +7,12 @@ Official ocumentation: https://docs.docker.com/engine/install/ubuntu/
 
 Or refer to snippet [Appendix. Docker installation commands](#appendix-docker-installation-commands)
 
+## Install docker-compose
+
+```
+sudo apt install docker-compose
+```
+
 ## Start repo
 to quick start, use 
 ```sudo ./build.sh start```

@@ -12,7 +12,7 @@ export GRAFANA_IMAGE="grafana/grafana:latest"
 export INFLUXDB_USER="admin"
 export INFLUXDB_PASSWD="cisco!123"
 export INFLUXDB_ORG="cisco"
-export INFLUXDB_BUCKET="cisco_mdt_bucket"
+export INFLUXDB_BUCKET="cisco_mdt"
 
 export GRAFANA_ADMIN_USER="admin"
 export GRAFANA_ADMIN_PASSWD="cisco!123"
